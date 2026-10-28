@@ -1,0 +1,1664 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#09090f" />
+  <meta name="description" content="InternMatch AI — an AI-assisted internship matching platform built with the MERN stack." />
+  <title>InternMatch AI | Project Showcase</title>
+
+  <style>
+    :root {
+      --bg: #09090f;
+      --surface: #11111b;
+      --surface2: #171725;
+      --border: rgba(255,255,255,.09);
+      --text: #f4f4fb;
+      --muted: #a2a2b8;
+      --purple: #a78bfa;
+      --cyan: #67e8f9;
+      --green: #86efac;
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .container { width: min(1120px, 90%); margin: auto; }
+
+    .gradient-text {
+      background: linear-gradient(110deg, var(--purple), var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cyan);
+      font-size: .76rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 20px;
+      height: 2px;
+      background: var(--cyan);
+    }
+
+    .section { padding: 100px 0; }
+
+    .section-heading {
+      max-width: 690px;
+      margin-bottom: 42px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+    }
+
+    .section-heading p, .muted { color: var(--muted); }
+
+    .navbar {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(9,9,15,.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 850;
+      letter-spacing: -.5px;
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-right: 8px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #8b5cf6, #22d3ee);
+      color: #09090f;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .nav-links a:hover { color: white; }
+
+    .nav-cta, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 750;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .nav-cta, .btn-primary {
+      color: #0a0a12;
+      background: linear-gradient(110deg, var(--purple), var(--cyan));
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: white;
+    }
+
+    .btn:hover, .nav-cta:hover { transform: translateY(-2px); }
+
+    .menu-button {
+      display: none;
+      color: white;
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 100px 0 85px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      left: 50%;
+      top: -280px;
+      transform: translateX(-50%);
+      background: #8b5cf6;
+      filter: blur(180px);
+      opacity: .18;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 7px 13px;
+      color: #d4d4e8;
+      background: rgba(255,255,255,.035);
+      font-size: .8rem;
+      margin-bottom: 26px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.6rem);
+      letter-spacing: -4px;
+      line-height: 1.04;
+      margin-bottom: 25px;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .tech-tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 32px;
+    }
+
+    .tech-tag {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.035);
+      color: #c9c9dc;
+      border-radius: 9px;
+      padding: 6px 11px;
+      font-size: .79rem;
+    }
+
+    .dashboard-window {
+      margin: 65px auto 0;
+      max-width: 960px;
+      border: 1px solid rgba(167,139,250,.3);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #10101a;
+      box-shadow: 0 25px 100px rgba(124,58,237,.13);
+      text-align: left;
+    }
+
+    .window-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .window-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #5d5d71;
+    }
+
+    .window-title { margin-left: 10px; }
+
+    .dashboard-body {
+      padding: 25px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .dash-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      min-width: 0;
+    }
+
+    .dash-card h3 { font-size: .95rem; margin-bottom: 6px; }
+    .dash-card p { color: var(--muted); font-size: .8rem; }
+
+    .match-row { margin-top: 19px; }
+
+    .match-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: .82rem;
+      margin-bottom: 8px;
+    }
+
+    .match-score { color: var(--green); font-weight: 800; }
+
+    .progress {
+      height: 6px;
+      background: #272738;
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      width: var(--width);
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--purple), var(--cyan));
+    }
+
+    .mini-label {
+      display: inline-block;
+      font-size: .7rem;
+      border-radius: 6px;
+      padding: 3px 7px;
+      margin: 8px 5px 0 0;
+      color: #c4b5fd;
+      background: rgba(167,139,250,.1);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .metric {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 18px;
+      border-radius: 14px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.55rem;
+      letter-spacing: -.8px;
+    }
+
+    .metric span { color: var(--muted); font-size: .77rem; }
+
+    .note {
+      margin-top: 16px;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      border: 1px solid var(--border);
+      background: linear-gradient(150deg, #151522, #101019);
+      border-radius: var(--radius);
+      padding: 25px;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(167,139,250,.45);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      display: grid;
+      place-items: center;
+      width: 45px;
+      height: 45px;
+      background: rgba(167,139,250,.12);
+      border: 1px solid rgba(167,139,250,.18);
+      border-radius: 13px;
+      font-size: 1.25rem;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 { font-size: 1.05rem; margin-bottom: 9px; }
+    .feature-card p { color: var(--muted); font-size: .9rem; }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+    }
+
+    .step {
+      position: relative;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 15px;
+      padding: 21px;
+    }
+
+    .step-number {
+      color: var(--cyan);
+      font-size: .76rem;
+      font-weight: 850;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .step h3 { font-size: .95rem; margin-bottom: 8px; }
+    .step p { color: var(--muted); font-size: .82rem; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px;
+      min-width: 0;
+    }
+
+    .panel h3 { margin-bottom: 8px; font-size: 1.2rem; }
+    .panel > p { color: var(--muted); font-size: .9rem; }
+
+    .weight-row { margin-top: 22px; }
+
+    .weight-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 8px;
+      font-size: .86rem;
+    }
+
+    .weight-head strong { color: var(--cyan); }
+
+    .architecture {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: .8rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      color: #d6d3ff;
+      background: #0b0b13;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 19px;
+      margin-top: 18px;
+    }
+
+    .architecture-note {
+      color: var(--muted);
+      font-size: .8rem;
+      margin-top: 12px;
+    }
+
+    .tree-panel { padding: 24px; }
+
+    .tree-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .tree-toolbar p { color: var(--muted); font-size: .82rem; }
+
+    .small-button {
+      border: 1px solid var(--border);
+      background: #1a1a29;
+      color: #e5e5f3;
+      border-radius: 9px;
+      padding: 8px 11px;
+      font-size: .78rem;
+      cursor: pointer;
+    }
+
+    .small-button:hover { border-color: var(--purple); }
+
+    .tree {
+      border: 1px solid var(--border);
+      background: #0c0c14;
+      border-radius: 13px;
+      padding: 13px;
+      overflow: hidden;
+    }
+
+    .tree details { margin-left: 15px; }
+
+    .tree > details { margin-left: 0; }
+
+    .tree summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 9px 8px;
+      border-radius: 8px;
+      min-width: 0;
+    }
+
+    .tree summary::-webkit-details-marker { display: none; }
+
+    .tree summary:hover { background: rgba(255,255,255,.045); }
+
+    .tree summary::before {
+      content: "›";
+      color: #8989a6;
+      font-size: 1.15rem;
+      line-height: 1.3;
+      transition: transform .15s;
+    }
+
+    .tree details[open] > summary::before { transform: rotate(90deg); }
+
+    .tree .file summary::before { content: "·"; }
+
+    .tree .file summary { cursor: pointer; }
+
+    .file-name {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      color: #e1e1f0;
+      font-size: .8rem;
+      overflow-wrap: anywhere;
+    }
+
+    .folder-name { color: var(--cyan); font-size: .83rem; font-weight: 750; }
+    .tree-children { border-left: 1px solid #2b2b40; margin-left: 13px; }
+    .tree .description {
+      display: none;
+      margin: 0 8px 8px 30px;
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.5;
+      padding: 9px 11px;
+      background: #151522;
+      border-radius: 8px;
+    }
+
+    .tree .file.selected > .description { display: block; }
+
+    .tree-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 14px;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .legend-dot { color: var(--cyan); }
+
+    .scope-list { list-style: none; margin-top: 20px; }
+
+    .scope-list li {
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      color: #dedeee;
+      font-size: .9rem;
+    }
+
+    .scope-list li:last-child { border-bottom: 0; }
+
+    .scope-list li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 900;
+      margin-right: 10px;
+    }
+
+    .scope-list.future li::before { content: "↗"; color: var(--purple); }
+
+    .team-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    .avatar {
+      flex: 0 0 52px;
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      font-weight: 900;
+      color: #0b0b12;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+    }
+
+    .team-card h3 { font-size: 1rem; }
+    .team-card p { color: var(--muted); font-size: .83rem; }
+
+    .team-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 9px; }
+
+    .team-links a {
+      color: var(--cyan);
+      font-size: .82rem;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 55px 25px;
+      border: 1px solid rgba(167,139,250,.23);
+      background: radial-gradient(ellipse at top, rgba(139,92,246,.13), transparent 70%), var(--surface);
+      border-radius: 25px;
+    }
+
+    .cta h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 15px; }
+    .cta p { color: var(--muted); max-width: 620px; margin: auto; }
+    .cta .hero-actions { margin-top: 25px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 27px 0;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s, transform .6s;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    :focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        padding: 22px 5%;
+        background: #10101a;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-links.open { display: flex; }
+      .menu-button { display: block; }
+      .nav-cta { display: none; }
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .workflow { grid-template-columns: repeat(2, 1fr); }
+      .split { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .section { padding: 72px 0; }
+      .hero { padding: 75px 0 55px; }
+      .hero h1 { letter-spacing: -2px; }
+      .dashboard-body { grid-template-columns: 1fr; padding: 14px; }
+      .metrics { grid-template-columns: 1fr; }
+      .grid-3, .workflow { grid-template-columns: 1fr; }
+      .panel { padding: 20px; }
+      .tree-panel { padding: 13px; }
+      .tree { padding: 7px; }
+      .tree details { margin-left: 8px; }
+      .tree > details { margin-left: 0; }
+      .team-card { align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="InternMatch AI home">
+        <span class="brand-icon">✦</span>InternMatch <span class="gradient-text">AI</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#overview">Overview</a>
+        <a href="#features">Features</a>
+        <a href="#matching">Matching</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#project-files">Project Files</a>
+        <a href="#team">Team</a>
+      </nav>
+
+      <a class="nav-cta" href="https://internmatch-ai-1vix.onrender.com/" target="_blank" rel="noopener noreferrer">
+        Live Project ↗
+      </a>
+
+      <button class="menu-button" id="menuButton" aria-label="Toggle navigation" aria-expanded="false">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="pill"><span class="dot"></span> MERN Stack Project Showcase</div>
+
+        <h1>Find the right<br /><span class="gradient-text">internship match.</span></h1>
+
+        <p>
+          InternMatch AI is an internship matching platform that helps students
+          discover relevant opportunities using their skills, interests,
+          preferences, and AI-assisted job analysis.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://internmatch-ai-1vix.onrender.com/" target="_blank" rel="noopener noreferrer">
+            Explore Live Project ↗
+          </a>
+          <a class="btn btn-secondary" href="#project-files">Explore Source Structure ↓</a>
+        </div>
+
+        <div class="tech-tags" aria-label="Technology stack">
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Express.js</span>
+          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">Mistral AI</span>
+          <span class="tech-tag">REST APIs</span>
+          <span class="tech-tag">JWT Cookies</span>
+        </div>
+
+        <div class="dashboard-window">
+          <div class="window-bar">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-title">Dashboard concept · Illustrative preview</span>
+          </div>
+
+          <div class="dashboard-body">
+            <div class="dash-card">
+              <h3>Personalized Job Matches</h3>
+              <p>Example scores to illustrate the matching experience</p>
+
+              <div class="match-row">
+                <div class="match-top">
+                  <span>Frontend Developer Intern</span>
+                  <span class="match-score">92%</span>
+                </div>
+                <div class="progress"><span style="--width:92%"></span></div>
+                <span class="mini-label">React</span>
+                <span class="mini-label">JavaScript</span>
+              </div>
+
+              <div class="match-row">
+                <div class="match-top">
+                  <span>MERN Stack Intern</span>
+                  <span class="match-score">86%</span>
+                </div>
+                <div class="progress"><span style="--width:86%"></span></div>
+                <span class="mini-label">Node.js</span>
+                <span class="mini-label">MongoDB</span>
+              </div>
+
+              <div class="match-row">
+                <div class="match-top">
+                  <span>Full Stack Intern</span>
+                  <span class="match-score">79%</span>
+                </div>
+                <div class="progress"><span style="--width:79%"></span></div>
+                <span class="mini-label">Express</span>
+                <span class="mini-label">REST APIs</span>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <h3>How the platform works</h3>
+              <p>Illustrative product workflow</p>
+
+              <div class="match-row">
+                <div class="match-top"><span>01 · Student Profile</span><span>→</span></div>
+                <p>Skills, interests, location, and job preferences.</p>
+              </div>
+
+              <div class="match-row">
+                <div class="match-top"><span>02 · Job Aggregation</span><span>→</span></div>
+                <p>Collect, normalize, and deduplicate external job listings.</p>
+              </div>
+
+              <div class="match-row">
+                <div class="match-top"><span>03 · Match Scoring</span><span>→</span></div>
+                <p>Rank opportunities using profile and job criteria.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">
+          Note: This is an illustrative interface preview, not a live screenshot or real-time dashboard.
+          Displayed match percentages are examples.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="overview">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">The Problem</span>
+          <h2>Finding an internship should be <span class="gradient-text">less confusing.</span></h2>
+          <p>
+            Students can struggle to find opportunities that fit their skills.
+            InternMatch AI organizes job discovery and helps students understand
+            how well an opportunity aligns with their profile.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="feature-card reveal">
+            <div class="feature-icon">⌕</div>
+            <h3>Scattered Opportunities</h3>
+            <p>Job listings come from different sources and can be difficult to organize in one place.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">◎</div>
+            <h3>Unclear Relevance</h3>
+            <p>Students need a practical way to compare opportunities with their skills and preferences.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">✦</div>
+            <h3>Trust Signals</h3>
+            <p>Heuristic signals can highlight listings that may deserve extra review before applying.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Core Capabilities</span>
+          <h2>From profile creation to <span class="gradient-text">job discovery.</span></h2>
+          <p>Key capabilities of the current project, with implementation boundaries explained honestly.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="feature-card reveal">
+            <div class="feature-icon">👤</div>
+            <h3>Authentication</h3>
+            <p>User registration and login, password hashing, signed tokens, and HTTP-only authentication cookies.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🧩</div>
+            <h3>Student Profiles</h3>
+            <p>Store skills, interests, location, desired roles, work mode, and opportunity preferences.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🌐</div>
+            <h3>Job Aggregation</h3>
+            <p>Integrations for JSearch, Adzuna, and Jooble, depending on available API configuration and access.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🎯</div>
+            <h3>Matching Engine</h3>
+            <p>Weighted rule-based scoring compares job requirements with the student's profile and preferences.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🤖</div>
+            <h3>AI Assistance</h3>
+            <p>Mistral AI supports backend job-description analysis and resume-draft generation functionality.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🛡️</div>
+            <h3>Trust & Deduplication</h3>
+            <p>Job normalization, duplicate removal, and heuristic risk signals help organize listings for review.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">User Journey</span>
+          <h2>A simple path to <span class="gradient-text">relevant opportunities.</span></h2>
+        </div>
+
+        <div class="workflow">
+          <article class="step reveal">
+            <div class="step-number">STEP 01</div>
+            <h3>Create an Account</h3>
+            <p>Register and sign in to access protected pages.</p>
+          </article>
+
+          <article class="step reveal">
+            <div class="step-number">STEP 02</div>
+            <h3>Build Your Profile</h3>
+            <p>Add your skills, interests, location, and work preferences.</p>
+          </article>
+
+          <article class="step reveal">
+            <div class="step-number">STEP 03</div>
+            <h3>Discover Jobs</h3>
+            <p>Retrieve and organize listings from configured job providers.</p>
+          </article>
+
+          <article class="step reveal">
+            <div class="step-number">STEP 04</div>
+            <h3>Review Matches</h3>
+            <p>Use match scores and job details to decide which opportunities to explore.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="matching">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Matching Logic</span>
+          <h2>How the <span class="gradient-text">match score</span> is calculated.</h2>
+          <p>
+            The matching engine uses weighted rules to compare a student profile
+            with job details. The percentages below represent the configured scoring weights.
+          </p>
+        </div>
+
+        <div class="split">
+          <div class="panel reveal">
+            <h3>Weighted Criteria</h3>
+            <p>Each criterion contributes to the overall match score.</p>
+
+            <div class="weight-row">
+              <div class="weight-head"><span>Skills</span><strong>45%</strong></div>
+              <div class="progress"><span style="--width:45%"></span></div>
+            </div>
+
+            <div class="weight-row">
+              <div class="weight-head"><span>Job Role</span><strong>20%</strong></div>
+              <div class="progress"><span style="--width:20%"></span></div>
+            </div>
+
+            <div class="weight-row">
+              <div class="weight-head"><span>Domain / Education / Interests</span><strong>10%</strong></div>
+              <div class="progress"><span style="--width:10%"></span></div>
+            </div>
+
+            <div class="weight-row">
+              <div class="weight-head"><span>Location</span><strong>10%</strong></div>
+              <div class="progress"><span style="--width:10%"></span></div>
+            </div>
+
+            <div class="weight-row">
+              <div class="weight-head"><span>Work Mode</span><strong>7.5%</strong></div>
+              <div class="progress"><span style="--width:7.5%"></span></div>
+            </div>
+
+            <div class="weight-row">
+              <div class="weight-head"><span>Opportunity Type</span><strong>7.5%</strong></div>
+              <div class="progress"><span style="--width:7.5%"></span></div>
+            </div>
+
+            <p class="note">Total configured weight: 100%. A match score indicates profile alignment, not a guarantee of selection.</p>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Matching Pipeline</h3>
+            <p>From external job data to personalized results.</p>
+
+            <div class="architecture">Job Providers
+      ↓
+Fetch Job Listings
+      ↓
+Normalize Job Data
+      ↓
+Remove Duplicates
+      ↓
+Calculate Trust / Risk Signals
+      ↓
+Compare Profile with Job
+      ↓
+Calculate Match Score
+      ↓
+Rank Relevant Opportunities</div>
+
+            <p class="architecture-note">
+              AI-assisted analysis supports selected backend workflows.
+              The core weighted matching score is rule-based, not generated entirely by AI.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="architecture">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">System Design</span>
+          <h2>How the <span class="gradient-text">technology stack</span> works together.</h2>
+          <p>
+            The React frontend communicates with the Express backend through APIs.
+            MongoDB stores application data, while external providers supply job listings.
+          </p>
+        </div>
+
+        <div class="split">
+          <div class="panel reveal">
+            <h3>High-Level Architecture</h3>
+            <div class="architecture">STUDENT
+   │
+   ▼
+REACT FRONTEND
+   │  HTTP / REST API
+   ▼
+NODE.JS + EXPRESS
+   ├── Authentication
+   ├── Profiles
+   ├── Jobs & Matching
+   ├── Applications
+   ├── Notifications
+   └── AI Services
+          │
+          ├── MongoDB Atlas
+          ├── JSearch API
+          ├── Adzuna API
+          ├── Jooble API
+          └── Mistral AI</div>
+            <p class="architecture-note">
+              External integrations depend on valid credentials, provider access, and service availability.
+            </p>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Technology Responsibilities</h3>
+            <ul class="scope-list">
+              <li><strong>React:</strong> User interface and page navigation.</li>
+              <li><strong>Node.js:</strong> JavaScript runtime for the backend.</li>
+              <li><strong>Express:</strong> API routes and request handling.</li>
+              <li><strong>MongoDB:</strong> Persistent storage for application data.</li>
+              <li><strong>Mistral AI:</strong> Selected AI-assisted backend tasks.</li>
+              <li><strong>External APIs:</strong> Fetch job listing data.</li>
+              <li><strong>JWT + HTTP-only cookies:</strong> Authentication mechanism.</li>
+              <li><strong>Socket.IO:</strong> Initialized for real-time communication; live notification delivery is not currently implemented.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="project-files">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Codebase Explorer</span>
+          <h2>Every file has <span class="gradient-text">a purpose.</span></h2>
+          <p>
+            Explore the main frontend and backend folders. Expand a folder, then click a file
+            to read a short English explanation of its purpose.
+          </p>
+        </div>
+
+        <div class="panel tree-panel reveal">
+          <div class="tree-toolbar">
+            <p>Project structure · Simplified file guide</p>
+            <div>
+              <button class="small-button" id="expandAll" type="button">Expand folders</button>
+              <button class="small-button" id="collapseAll" type="button">Collapse folders</button>
+            </div>
+          </div>
+
+          <div class="tree" id="projectTree">
+
+            <details open>
+              <summary><span class="folder-name">📁 client/src/</span></summary>
+              <div class="tree-children">
+
+                <div class="file">
+                  <summary><span class="file-name">App.jsx</span></summary>
+                  <p class="description">Defines the main React application and page routes.</p>
+                </div>
+
+                <div class="file">
+                  <summary><span class="file-name">main.jsx</span></summary>
+                  <p class="description">Starts React and renders the application in the browser.</p>
+                </div>
+
+                <div class="file">
+                  <summary><span class="file-name">index.css</span></summary>
+                  <p class="description">Contains global styles shared across the frontend.</p>
+                </div>
+
+                <details>
+                  <summary><span class="folder-name">📁 components/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">ProtectedRoute.jsx</span></summary>
+                      <p class="description">Restricts access to pages that require authentication.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 context/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">AuthContext.jsx</span></summary>
+                      <p class="description">Provides shared authentication state to React components.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">auth-context.js</span></summary>
+                      <p class="description">Contains the authentication context definition or related context setup.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 hooks/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">useAuth.js</span></summary>
+                      <p class="description">Provides a reusable hook to access authentication context.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 layouts/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">Home.jsx</span></summary>
+                      <p class="description">Defines the home page layout and its presentation.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 pages/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">Applications.jsx</span></summary>
+                      <p class="description">Displays application records and their statuses.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">Dashboard.jsx</span></summary>
+                      <p class="description">Displays the user's main dashboard and relevant information.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">Jobs.jsx</span></summary>
+                      <p class="description">Displays available job and internship listings.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">Login.jsx</span></summary>
+                      <p class="description">Provides the login interface for existing users.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">Notifications.jsx</span></summary>
+                      <p class="description">Displays notifications retrieved by the application.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">Profile.jsx</span></summary>
+                      <p class="description">Lets users view and update their profile details.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">Register.jsx</span></summary>
+                      <p class="description">Provides the user registration interface.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">SavedJobs.jsx</span></summary>
+                      <p class="description">Displays jobs that the user has saved.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 services/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">api.js</span></summary>
+                      <p class="description">Centralizes frontend API requests to the backend.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 assets/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">Static assets</span></summary>
+                      <p class="description">Stores images, icons, and other imported visual resources.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 utils/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">Helper modules</span></summary>
+                      <p class="description">Holds reusable helper logic used by frontend code.</p>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </details>
+
+            <details open>
+              <summary><span class="folder-name">📁 server/src/</span></summary>
+              <div class="tree-children">
+
+                <div class="file">
+                  <summary><span class="file-name">server.js</span></summary>
+                  <p class="description">Starts the backend server and listens on the configured port.</p>
+                </div>
+
+                <div class="file">
+                  <summary><span class="file-name">app.js</span></summary>
+                  <p class="description">Configures Express, middleware, and backend application routes.</p>
+                </div>
+
+                <div class="file">
+                  <summary><span class="file-name">socket.js</span></summary>
+                  <p class="description">Initializes Socket.IO; live notification delivery is not currently implemented.</p>
+                </div>
+
+                <details>
+                  <summary><span class="folder-name">📁 config/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">database.js</span></summary>
+                      <p class="description">Configures the connection to the MongoDB database.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 ai/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">ai.prompts.js</span></summary>
+                      <p class="description">Stores prompts used to guide selected AI tasks.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">ai.routes.js</span></summary>
+                      <p class="description">Defines API endpoints for AI-related functionality.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">ai.service.js</span></summary>
+                      <p class="description">Contains the service logic for AI-assisted operations.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">ai.utils.js</span></summary>
+                      <p class="description">Provides helper functions for AI-related processing.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 integrations/</span></summary>
+                  <div class="tree-children">
+
+                    <details>
+                      <summary><span class="folder-name">📁 adzuna/</span></summary>
+                      <div class="tree-children">
+                        <div class="file">
+                          <summary><span class="file-name">adzuna.service.js</span></summary>
+                          <p class="description">Requests job listings from the Adzuna integration.</p>
+                        </div>
+                        <div class="file">
+                          <summary><span class="file-name">adzuna.normalizer.js</span></summary>
+                          <p class="description">Converts Adzuna results into the application's common job format.</p>
+                        </div>
+                      </div>
+                    </details>
+
+                    <details>
+                      <summary><span class="folder-name">📁 jooble/</span></summary>
+                      <div class="tree-children">
+                        <div class="file">
+                          <summary><span class="file-name">jooble.service.js</span></summary>
+                          <p class="description">Requests job listings from the Jooble integration.</p>
+                        </div>
+                        <div class="file">
+                          <summary><span class="file-name">jooble.normalizer.js</span></summary>
+                          <p class="description">Converts Jooble results into the application's common job format.</p>
+                        </div>
+                      </div>
+                    </details>
+
+                    <details>
+                      <summary><span class="folder-name">📁 jsearch/</span></summary>
+                      <div class="tree-children">
+                        <div class="file">
+                          <summary><span class="file-name">jsearch.service.js</span></summary>
+                          <p class="description">Handles requests to the JSearch job-search API.</p>
+                        </div>
+                      </div>
+                    </details>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 middleware/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">admin.middleware.js</span></summary>
+                      <p class="description">Checks administrator access where this middleware is applied.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">auth.middleware.js</span></summary>
+                      <p class="description">Checks authentication for protected backend requests.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">error.middleware.js</span></summary>
+                      <p class="description">Handles errors passed through the Express middleware pipeline.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">validate.middleware.js</span></summary>
+                      <p class="description">Provides request-validation middleware.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 modules/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">auth/</span></summary>
+                      <p class="description">Organizes authentication controllers, models, routes, services, and validation.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">profiles/</span></summary>
+                      <p class="description">Organizes user-profile data and related backend operations.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">jobs/</span></summary>
+                      <p class="description">Organizes job listing data and job-related business logic.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">matching/</span></summary>
+                      <p class="description">Calculates compatibility scores between users and job listings.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">applications/</span></summary>
+                      <p class="description">Manages application records and their statuses inside the platform.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">notifications/</span></summary>
+                      <p class="description">Manages notification records and related API operations.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">resumes/</span></summary>
+                      <p class="description">Contains backend operations related to resume functionality.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 routes/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">index.js</span></summary>
+                      <p class="description">Organizes or mounts the backend API route groups.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">auth.routes.js</span></summary>
+                      <p class="description">Defines authentication-related API endpoints.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">jobs.routes.js</span></summary>
+                      <p class="description">Defines endpoints for retrieving and managing job data.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">profile.routes.js</span></summary>
+                      <p class="description">Defines endpoints for user profile operations.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">application.routes.js</span></summary>
+                      <p class="description">Defines endpoints for application records and statuses.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span class="folder-name">📁 utils/</span></summary>
+                  <div class="tree-children">
+                    <div class="file">
+                      <summary><span class="file-name">jobDeduplicator.js</span></summary>
+                      <p class="description">Removes duplicate job listings from aggregated results.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">jobRequirementExtractor.js</span></summary>
+                      <p class="description">Extracts relevant requirements from job information.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">jobSkillExtractor.js</span></summary>
+                      <p class="description">Identifies skills mentioned in job descriptions.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">jobTrustSignals.js</span></summary>
+                      <p class="description">Calculates heuristic signals that can help flag listings for review.</p>
+                    </div>
+                    <div class="file">
+                      <summary><span class="file-name">jobWorkModeExtractor.js</span></summary>
+                      <p class="description">Identifies work modes such as remote, hybrid, or onsite when possible.</p>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </details>
+          </div>
+
+          <div class="tree-legend">
+            <span><span class="legend-dot">●</span> Folder: expand to explore</span>
+            <span><span class="legend-dot">●</span> File: click to read its purpose</span>
+          </div>
+
+          <p class="note">
+            Descriptions explain the expected responsibility of each listed file or module.
+            Exact behavior depends on its implementation. This is a simplified guide, not an exhaustive filesystem listing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Project Scope</span>
+          <h2>What works today and <span class="gradient-text">what comes next.</span></h2>
+          <p>Separating implemented functionality from future improvements makes the project easier to evaluate.</p>
+        </div>
+
+        <div class="split">
+          <div class="panel reveal">
+            <h3>Implemented Capabilities</h3>
+            <p>Core functionality included in the current project.</p>
+            <ul class="scope-list">
+              <li>Registration and login with protected routes.</li>
+              <li>User profile management.</li>
+              <li>External job API integrations when configured.</li>
+              <li>Job normalization and duplicate removal.</li>
+              <li>Weighted profile-to-job matching.</li>
+              <li>Heuristic job trust and risk signals.</li>
+              <li>Application records with SAVED and APPLIED statuses.</li>
+              <li>REST-based notification data and retrieval.</li>
+              <li>Selected Mistral AI backend features.</li>
+            </ul>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Future Improvements</h3>
+            <p>Possible next steps for extending the platform.</p>
+            <ul class="scope-list future">
+              <li>Company dashboard for recruiters and employers.</li>
+              <li>Candidate shortlisting and interview scheduling.</li>
+              <li>Email verification and SMTP email workflows.</li>
+              <li>Resume upload and automatic resume extraction.</li>
+              <li>Dedicated frontend experience for AI resume generation.</li>
+              <li>Live Socket.IO notification delivery.</li>
+              <li>More advanced job verification and company checks.</li>
+              <li>Additional testing, monitoring, and deployment hardening.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="note">
+          Important: SAVED and APPLIED represent in-platform application statuses.
+          The current project does not submit applications directly to employers.
+          Trust signals are heuristic and do not guarantee that a job is legitimate.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="team">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Project Team</span>
+          <h2>Built through <span class="gradient-text">learning and collaboration.</span></h2>
+          <p>Explore the project and the team's public GitHub profiles.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="team-card reveal">
+            <div class="avatar">S</div>
+            <div>
+              <h3>Suraj</h3>
+              <p>MERN Stack Development</p>
+              <div class="team-links">
+                <a href="https://github.com/SurajX09" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="team-card reveal">
+            <div class="avatar">S</div>
+            <div>
+              <h3>Sanskruti</h3>
+              <p>Project Collaboration</p>
+              <div class="team-links">
+                <a href="https://github.com/sanskruti4853-lang" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🚀</div>
+            <h3>Project Goal</h3>
+            <p>Make internship discovery more organized, transparent, and aligned with student skills.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta reveal">
+          <span class="eyebrow">Explore the Project</span>
+          <h2>Meet <span class="gradient-text">InternMatch AI.</span></h2>
+          <p>
+            Explore the deployed application and see how a MERN-based platform
+            can combine job aggregation, profile matching, and AI-assisted workflows.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://internmatch-ai-1vix.onrender.com/" target="_blank" rel="noopener noreferrer">
+              Open Live Project ↗
+            </a>
+            <a class="btn btn-secondary" href="https://github.com/SurajX09" target="_blank" rel="noopener noreferrer">
+              View GitHub ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> InternMatch AI · Project Showcase</span>
+      <span>Built with React, Node.js, Express, MongoDB, and AI-assisted services.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Set the current year in the footer.
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile navigation.
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.textContent = isOpen ? "✕" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰";
+      });
+    });
+
+    // Reveal sections when they enter the viewport.
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      revealElements.forEach((element) => observer.observe(element));
+    } else {
+      revealElements.forEach((element) => element.classList.add("visible"));
+    }
+
+    // Click a file to show or hide its description.
+    document.querySelectorAll(".tree .file > summary").forEach((summary) => {
+      summary.setAttribute("role", "button");
+      summary.setAttribute("tabindex", "0");
+      summary.setAttribute("aria-expanded", "false");
+
+      const toggleFile = () => {
+        const file = summary.parentElement;
+        const selected = file.classList.toggle("selected");
+        summary.setAttribute("aria-expanded", String(selected));
+      };
+
+      summary.addEventListener("click", toggleFile);
+
+      summary.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleFile();
+        }
+      });
+    });
+
+    // Expand or collapse folders in the project explorer.
+    const tree = document.getElementById("projectTree");
+
+    document.getElementById("expandAll").addEventListener("click", () => {
+      tree.querySelectorAll("details").forEach((folder) => {
+        folder.open = true;
+      });
+    });
+
+    document.getElementById("collapseAll").addEventListener("click", () => {
+      tree.querySelectorAll("details").forEach((folder) => {
+        folder.open = false;
+      });
+      tree.querySelectorAll(".file.selected").forEach((file) => {
+        file.classList.remove("selected");
+        file.querySelector("summary").setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
+</body>
+</html>
